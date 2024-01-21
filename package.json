@@ -1,0 +1,35 @@
+{
+  "name": "js-template-repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "lint": "npx eslint src/*.js src/**/*.js",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "npx prettier --write src/*.js src/**/*.js",
+    "git:undo": "git stash -u && git stash drop"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "",
+    "@babel/preset-env": "",
+    "babel-loader": "",
+    "css-loader": "",
+    "eslint": "",
+    "eslint-config-airbnb-base": "",
+    "eslint-config-prettier": "",
+    "eslint-plugin-import": "",
+    "html-webpack-plugin": "",
+    "prettier": "",
+    "style-loader": "",
+    "webpack": "",
+    "webpack-cli": "",
+    "webpack-dev-server": "",
+    "webpack-merge": ""
+  }
+}
