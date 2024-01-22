@@ -43,7 +43,7 @@ export default class Tree {
   }
 
   // This method mainly calls insertRec()
-  insert(key) {
+  insertNode(key) {
     this.root = this.#insertRec(this.root, key);
   }
 
@@ -64,6 +64,73 @@ export default class Tree {
     // Return the (unchanged) node pointer
     return curRoot;
   }
+
+  // This method mainly calls deleteRec()
+  deleteNode(key) {
+    this.root = this.#deleteRec(this.root, key);
+  }
+
+  /* Given a binary search tree and a key, this function
+   deletes the key and returns the new root */
+  #deleteRec(root, k) {
+    const curRoot = root;
+    // Base case
+    if (curRoot === null) {
+      return curRoot;
+    }
+
+    // Recursive calls for ancestors of
+    // node to be deleted
+    if (curRoot.key > k) {
+      curRoot.left = this.#deleteRec(curRoot.left, k);
+      return curRoot;
+    }
+    if (curRoot.key < k) {
+      curRoot.right = this.#deleteRec(curRoot.right, k);
+      return curRoot;
+    }
+
+    // We reach here when curRoot is the node
+    // to be deleted.
+
+    // If one of the children is empty
+    if (curRoot.left === null) {
+      const temp = curRoot.right;
+      return temp;
+    }
+    if (curRoot.right === null) {
+      const temp = curRoot.left;
+      return temp;
+    }
+
+    // If both children exist
+    let succParent = curRoot;
+
+    // Find successor
+    let succ = curRoot.right;
+    while (succ.left !== null) {
+      succParent = succ;
+      succ = succ.left;
+    }
+
+    // Since successor
+    // is always left child of its parent
+    // we can safely make successor's right
+    // right child as left of its parent.
+    // If there is no succ, then assign
+    // succ.right to succParent.right
+    if (succParent !== curRoot) {
+      succParent.left = succ.right;
+    } else {
+      succParent.right = succ.right;
+    }
+
+    // Copy Successor Data to curRoot
+    curRoot.key = succ.key;
+
+    // return curRoot
+    return curRoot;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -81,5 +148,29 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 const arr = [1, 5, 22, 33, 56, 75, 2, 3, 3, 3, 2, 2, 2, 4, 27, 99];
 const newTree = new Tree(arr);
+
+prettyPrint(newTree.root);
+newTree.deleteNode(22);
+console.log("-----------------------------------------------------");
+
+prettyPrint(newTree.root);
+newTree.deleteNode(33);
+console.log("-----------------------------------------------------");
+
+prettyPrint(newTree.root);
+newTree.deleteNode(3);
+console.log("-----------------------------------------------------");
+
+prettyPrint(newTree.root);
+newTree.deleteNode(27);
+console.log("-----------------------------------------------------");
+
+prettyPrint(newTree.root);
+newTree.insertNode(111);
+console.log("-----------------------------------------------------");
+
+prettyPrint(newTree.root);
+newTree.insertNode(25);
+console.log("-----------------------------------------------------");
 
 prettyPrint(newTree.root);
