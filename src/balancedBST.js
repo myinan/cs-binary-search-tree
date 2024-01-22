@@ -304,6 +304,7 @@ export default class Tree {
   }
 }
 
+// Utility function to prettyPrint the BST
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
     return;
@@ -317,47 +318,39 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const PrintWithLineBreak = (node) => {
+// prettyPrint with line break
+const printWithLineBreak = (node) => {
   prettyPrint(node);
   console.log("-----------------------------------------------------");
 };
 
-/* const arr = [1, 5, 22, 33, 56, 75, 2, 3, 3, 3, 2, 2, 2, 4, 27, 99];
+/* Driver Script */
+const arr = [1, 5, 22, 33, 56, 75, 2, 3, 3, 3, 2, 2, 2, 4, 27, 99];
 const newTree = new Tree(arr);
+printWithLineBreak(newTree.root);
+console.log(newTree.isBalanced());
 
-prettyPrint(newTree.root);
-newTree.deleteNode(22);
-console.log("-----------------------------------------------------");
-
-prettyPrint(newTree.root);
-newTree.deleteNode(33);
-console.log("-----------------------------------------------------");
-
-prettyPrint(newTree.root);
-newTree.deleteNode(3);
-console.log("-----------------------------------------------------");
-
-prettyPrint(newTree.root);
-newTree.deleteNode(27);
-console.log("-----------------------------------------------------");
-
-prettyPrint(newTree.root);
-newTree.insertNode(111);
-console.log("-----------------------------------------------------");
-
-prettyPrint(newTree.root);
-newTree.insertNode(25);
-console.log("-----------------------------------------------------");
-
-prettyPrint(newTree.root);
-
-console.log(newTree.find(9));
+console.log(newTree.levelOrder());
+console.log(newTree.preOrder());
+console.log(newTree.inOrder());
 console.log(newTree.postOrder());
-console.log(newTree.getNodeHeight(56));
-console.log(newTree.getNodeDepth(56));
+
+// Unbalance the tree by adding several numbers > 100.
+newTree.insertNode(652);
+newTree.insertNode(125);
+newTree.insertNode(324);
+newTree.insertNode(965);
+newTree.insertNode(444);
+newTree.insertNode(720);
+printWithLineBreak(newTree.root);
 console.log(newTree.isBalanced());
 
+// Rebalance the tree.
 newTree.rebalance();
-prettyPrint(newTree.root);
+printWithLineBreak(newTree.root);
 console.log(newTree.isBalanced());
- */
+
+console.log(newTree.levelOrder());
+console.log(newTree.preOrder());
+console.log(newTree.inOrder());
+console.log(newTree.postOrder());
