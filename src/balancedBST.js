@@ -275,6 +275,33 @@ export default class Tree {
 
     return leftParent || rightParent;
   }
+
+  isBalanced(root = this.root) {
+    if (root === null) {
+      return true; // An empty tree is balanced
+    }
+
+    // Calculate the height difference between the left and right subtrees
+    const leftHeight = this.#getNodeHeightHelper(root.left);
+    const rightHeight = this.#getNodeHeightHelper(root.right);
+
+    // Check if the tree rooted at this node is balanced
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(root.left) &&
+      this.isBalanced(root.right)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  rebalance() {
+    const sortedArr = this.inOrder();
+    this.root = Tree.#buildTree(sortedArr);
+    return this.root;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -290,7 +317,12 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const arr = [1, 5, 22, 33, 56, 75, 2, 3, 3, 3, 2, 2, 2, 4, 27, 99];
+const PrintWithLineBreak = (node) => {
+  prettyPrint(node);
+  console.log("-----------------------------------------------------");
+};
+
+/* const arr = [1, 5, 22, 33, 56, 75, 2, 3, 3, 3, 2, 2, 2, 4, 27, 99];
 const newTree = new Tree(arr);
 
 prettyPrint(newTree.root);
@@ -320,7 +352,12 @@ console.log("-----------------------------------------------------");
 prettyPrint(newTree.root);
 
 console.log(newTree.find(9));
-
 console.log(newTree.postOrder());
 console.log(newTree.getNodeHeight(56));
 console.log(newTree.getNodeDepth(56));
+console.log(newTree.isBalanced());
+
+newTree.rebalance();
+prettyPrint(newTree.root);
+console.log(newTree.isBalanced());
+ */
