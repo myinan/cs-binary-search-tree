@@ -131,6 +131,23 @@ export default class Tree {
     // return curRoot
     return curRoot;
   }
+
+  find(value, root = this.root) {
+    const curRoot = root;
+    let returnVal;
+
+    if (curRoot?.key === value || !curRoot) {
+      return curRoot;
+    }
+
+    if (value > curRoot.key) {
+      returnVal = this.find(value, curRoot.right);
+    } else if (value < curRoot.key) {
+      returnVal = this.find(value, curRoot.left);
+    }
+    if (returnVal) return returnVal;
+    return new Error("Could not find node with the searched value.");
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -174,3 +191,5 @@ newTree.insertNode(25);
 console.log("-----------------------------------------------------");
 
 prettyPrint(newTree.root);
+
+console.log(newTree.find(9));
