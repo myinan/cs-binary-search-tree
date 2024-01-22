@@ -1,6 +1,6 @@
 export default class TreeNode {
   constructor(data) {
-    this.data = data;
+    this.key = data;
     this.left = null;
     this.right = null;
   }
