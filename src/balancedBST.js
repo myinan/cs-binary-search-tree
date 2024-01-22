@@ -148,6 +148,95 @@ export default class Tree {
     if (returnVal) return returnVal;
     return new Error("Could not find node with the searched value.");
   }
+
+  // Breadth-first traversal
+  levelOrder(callback = (input) => input) {
+    if (this.root === null) {
+      return [];
+    }
+
+    const result = [];
+    const queue = [];
+
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+      result.push(currentNode.key);
+
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+    return callback(result);
+  }
+
+  // Depth-First - Left / Root / Right Traversal
+  // Depth-First LRR Traversal creates a sorted array from a BST
+  inOrder(callback = (param) => param) {
+    const result = [];
+    this.#inOrderTraverse(this.root, result);
+    return callback(result);
+  }
+
+  #inOrderTraverse(node, result) {
+    if (node !== null) {
+      this.#inOrderTraverse(node.left, result);
+      result.push(node.key);
+      this.#inOrderTraverse(node.right, result);
+    }
+  }
+
+  // Depth-First - Root / Left / Right Traversal
+  preOrder(callback = (param) => param) {
+    const result = [];
+    this.#preOrderTraverse(this.root, result);
+    return callback(result);
+  }
+
+  #preOrderTraverse(node, result) {
+    if (node !== null) {
+      result.push(node.key);
+      this.#preOrderTraverse(node.left, result);
+      this.#preOrderTraverse(node.right, result);
+    }
+  }
+
+  // Depth-First - Left / Right / Root Traversal
+  postOrder(callback = (param) => param) {
+    const result = [];
+    this.#postOrderTraverse(this.root, result);
+    return callback(result);
+  }
+
+  #postOrderTraverse(node, result) {
+    if (node !== null) {
+      this.#postOrderTraverse(node.left, result);
+      this.#postOrderTraverse(node.right, result);
+      result.push(node.key);
+    }
+  }
+
+  getNodeHeight(key) {
+    const node = this.find(key);
+    if (Object.getPrototypeOf(node).name === "Error") return node;
+    return this.#getNodeHeightHelper(node);
+  }
+
+  #getNodeHeightHelper(node) {
+    if (node === null) {
+      return -1; // Height of an empty tree is -1
+    }
+
+    const leftHeight = this.#getNodeHeightHelper(node.left);
+    const rightHeight = this.#getNodeHeightHelper(node.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -193,3 +282,6 @@ console.log("-----------------------------------------------------");
 prettyPrint(newTree.root);
 
 console.log(newTree.find(9));
+
+console.log(newTree.postOrder());
+console.log(newTree.getNodeHeight(30));
