@@ -1,1 +1,1 @@
-Implement a balanced binary search tree.
+A balanced binary search tree implementation with Vanilla Javascript.
