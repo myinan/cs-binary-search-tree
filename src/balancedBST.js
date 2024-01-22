@@ -237,6 +237,44 @@ export default class Tree {
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  getNodeDepth(key) {
+    const node = this.find(key);
+    if (Object.getPrototypeOf(node).name === "Error") return node;
+    return this.#getNodeDepthHelper(node);
+  }
+
+  #getNodeDepthHelper(node) {
+    const { root } = this;
+    if (node === null) {
+      return -1; // Depth of an empty tree is -1
+    }
+
+    if (node === root) {
+      return 0; // Depth of the root node is 0
+    }
+
+    const parentDepth = this.#getNodeDepthHelper(
+      Tree.#findParent(root, node),
+      root,
+    );
+    return parentDepth + 1;
+  }
+
+  static #findParent(root, target) {
+    if (root === null || root === target) {
+      return null; // No parent or found the target as the root
+    }
+
+    if (root.left === target || root.right === target) {
+      return root;
+    }
+
+    const leftParent = Tree.#findParent(root.left, target);
+    const rightParent = Tree.#findParent(root.right, target);
+
+    return leftParent || rightParent;
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -284,4 +322,5 @@ prettyPrint(newTree.root);
 console.log(newTree.find(9));
 
 console.log(newTree.postOrder());
-console.log(newTree.getNodeHeight(30));
+console.log(newTree.getNodeHeight(56));
+console.log(newTree.getNodeDepth(56));
