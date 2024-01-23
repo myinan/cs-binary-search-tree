@@ -1,4 +1,4 @@
-# Balanced BST
+# Balanced BST (Deployed to `gh-pages`)
 ## `.src/balancedBST.js`
 
 ### A balanced binary search tree implementation with Vanilla Javascript.
