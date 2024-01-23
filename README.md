@@ -1,5 +1,6 @@
 # Balanced BST (Deployed to `gh-pages`)
 ## `.src/balancedBST.js`
+## Deployment address: [`myinan.github.io/cs-binary-search-tree/`](https://myinan.github.io/cs-binary-search-tree/ "myinan.github.io/cs-binary-search-tree/")
 
 ### A balanced binary search tree implementation with Vanilla Javascript.
 + Create a new Binary Search Tree instance with the `new Tree(arr)` call. arr is an array provided by the user which might have duplicate items and don't have to be sorted. Cleaning and sorting the data is handled by the Tree class.
