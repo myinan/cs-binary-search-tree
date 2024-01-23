@@ -1,7 +1,7 @@
 # Balanced BST
-## A balanced binary search tree implementation with Vanilla Javascript.
 ## `.src/balancedBST.js`
 
+### A balanced binary search tree implementation with Vanilla Javascript.
 + Create a new Binary Search Tree instance with the `new Tree(arr)` call. arr is an array provided by the user which might have duplicate items and don't have to be sorted. Cleaning and sorting the data is handled by the Tree class.
 
 + `insertNode(key)` instance method insert a new node into the BST, which has the "key" provided by user as it's key property.
